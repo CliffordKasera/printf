@@ -1,6 +1,8 @@
-#include "holberton.h"
+#include "main.h"
 #include <unistd.h>
 #include <stdio.h>
+#include <stdarg.h>
+#include <stdlib.h>
 /**
  * print_int - prints an integer.
  * @arg: argument
@@ -28,4 +30,19 @@ int print_int(va_list arg)
 		_putchar('0' + resp);
 	}
 	return (charPrinted);
+}
+/**
+ * print_unsignedToBinary - prints an integer.
+ * @arg: argument
+ * Return: 0
+ */
+int print_unsignedToBinary(va_list arg)
+{
+	unsigned int n = va_arg(arg, unsigned int);
+	unsigned int printed;
+
+	print_binary(n, &printed);
+	print_binary(n, &printed);
+
+	return (printed);
 }
