@@ -1,86 +1,34 @@
 #include "main.h"
-#include <stdlib.h>
-#include <stdio.h>
-
 /**
- * printIdentifiers - prints special characters
- * @next: character after the %
- * @arg: argument for the indentifier
- * Return: the number of characters printed
- * (excluding the null byte used to end output to strings)
+ * _printf - Receives the main string and all the necessary parameters to
+ * print a formated string
+ * @format: A string containing all the desired characters
+ * Return: A total count of the characters printed
  */
-
-int printIdentifiers(char next, va_list arg)
-{
-	int functsIndex;
-
-	identifierStruct functs[] = {
-		{"d", print_int},
-		{"i", print_int},
-		/**{"c", print_char},
-		 *{"s", print_str},
-		*{"u", print_unsigned},
-		*{"b", print_unsignedToBinary},
-		*{"o", print_oct},
-		*{"x", print_hex},
-		*{"X", print_HEX},
-		*{"S", print_STR},
-		*/
-		{NULL, NULL}
-	};
-	for (functsIndex = 0; functs[functsIndex].indentifier != NULL; functsIndex++)
-	{
-		if (functs[functsIndex].indentifier[0] == next)
-			return (functs[functsIndex].printer(arg));
-	}
-	return (0);
-}
-
-/**
- * _printf - mimic printf from stdio
- * Description: produces output according to a format
- * write output to stdout, the standard output stream
- * @format: character string composed of zero or more directives
- * Return: the number of characters printed
- * (excluding the null byte used to end output to strings)
- * return -1 for incomplete identifier error
- */
-
 int _printf(const char *format, ...)
 {
-	unsigned int i;
-	int identifierPrinted = 0, charPrinted = 0;
-	va_list arg;
-
-	va_start(arg, format);
+	int printed_chars;
+	conver_t f_list[] = {
+		{"c", print_char},
+		{"s", print_string},
+		{"%", print_percent},
+		{"d", print_integer},
+		{"i", print_integer},
+		{"b", print_binary},
+		{"r", print_reversed},
+		{"R", rot13},
+		{"u", unsigned_integer},
+		{"o", print_octal},
+		{"x", print_hex},
+		{"X", print_heX},
+		{NULL, NULL}
+	};
+	va_list arg_list;
 	if (format == NULL)
 		return (-1);
-	for (i = 0; format[i] != '\0'; i++)
-	{
-		if (format[i] != '%')
-		{
-			_putchar(format[i]);
-			charPrinted++;
-			continue;
-		}
-		if (format[i + 1] == '%')
-			_putchar('%');
-		charPrinted++;
-		i++;
-		continue;
-	}
-	if (format[i + 1] == '\0')
-		return (-1);
-	identifierPrinted = printIdentifiers(format[i + 1], arg);
-	if (identifierPrinted == -1 || identifierPrinted != 0)
-		i++;
-	if (identifierPrinted > 0)
-		charPrinted += identifierPrinted;
-	if (identifierPrinted == 0)
-	{
-		_putchar('%');
-		charPrinted++;
-	}
-	va_end(arg);
-	return (charPrinted);
+	va_start(arg_list, format);
+	/*Calling parser function*/
+	printed_chars = parser(format, f_list, arg_list);
+	va_end(arg_list);
+	return (printed_chars);
 }
