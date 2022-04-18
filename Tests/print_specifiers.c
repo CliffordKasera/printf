@@ -35,7 +35,7 @@ int print_int(va_list arg)
  * print_unsignedToBinary - prints an integer.
  * @arg: argument
  * Return: 0
- *
+ 
 int print_unsignedToBinary(va_list arg)
 {
 	unsigned int n = va_arg(arg, unsigned int);

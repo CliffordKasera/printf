@@ -18,7 +18,7 @@ int printIdentifiers(char next, va_list arg)
 		{"d", print_int},
 		{"i", print_int},
 		/**{"c", print_char},
-		*{"s", print_str},
+		 *{"s", print_str},
 		*{"u", print_unsigned},
 		*{"b", print_unsignedToBinary},
 		*{"o", print_oct},
