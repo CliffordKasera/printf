@@ -1,3 +1,6 @@
+#include "holberton.h"
+#include <unistd.h>
+#include <stdio.h>
 /**
  * print_int - prints an integer.
  * @arg: argument
