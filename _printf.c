@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
  * _printf - Receives the main string and all the necessary parameters to
  * print a formated string
@@ -27,6 +28,7 @@ int _printf(const char *format, ...)
 
 	if (format == NULL)
 		return (-1);
+
 	va_start(arg_list, format);
 	/*Calling parser function*/
 	printed_chars = parser(format, f_list, arg_list);
